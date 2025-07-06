@@ -12,6 +12,13 @@ const getUserById = (userId) => {
 const findUserById = (userId) => {
     return getUserById(userId);
 }
+
+const findYoungestUser = () => {
+  if (users.length === 0) return null;
+  return users.reduce((youngest, user) =>
+    user.age < youngest.age ? user : youngest
+  );
+};
 //#endregion
 
 //#region POST
@@ -58,6 +65,6 @@ const removeUserById = (userId) => {
 //#endregion
 
 //#region EXPORTS
-export { findUserById, createUserById, replaceUser, patchUser, removeUserById };
+export { findUserById, createUserById, replaceUser, patchUser, removeUserById, findYoungestUser };
 //#endregion
 

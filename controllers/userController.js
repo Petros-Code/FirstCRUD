@@ -6,6 +6,7 @@ import {
     replaceUser,
     patchUser,
     removeUserById,
+    findYoungestUser,
 } from "../services/userService.js"
 //#endregion --------------------------------
 
@@ -18,6 +19,15 @@ const getUserById = (req, res) => {
     } else {
         res.status(404).send("Utilisateur non trouvé");
     }
+};
+
+const getYoungestUser = (req, res) => {
+  const youngest = findYoungestUser();
+  if (youngest) {
+    res.json(youngest);
+  } else {
+    res.status(404).json({ error: "Aucun utilisateur trouvé." });
+  }
 };
 //#endregion -------------------------------
 
@@ -79,5 +89,6 @@ export {
     putUserById,
     patchUserById,
     deleteUserById,
+    getYoungestUser,
 };
 //#endregion ---------------------------------
