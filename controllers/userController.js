@@ -7,6 +7,7 @@ import {
     patchUser,
     removeUserById,
     findYoungestUser,
+    searchUsersByName,
 } from "../services/userService.js"
 //#endregion --------------------------------
 
@@ -29,6 +30,21 @@ const getYoungestUser = (req, res) => {
     res.status(404).json({ error: "Aucun utilisateur trouvé." });
   }
 };
+
+const searchUsers = (req, res) => {
+  const nameQuery = req.query.name;
+  if (!nameQuery) {
+    return res.status(400).json({ error: "Paramètre 'name' requis dans la requête." });
+  }
+
+  const matchedUsers = searchUsersByName(nameQuery);
+  if (matchedUsers.length > 0) {
+    res.json(matchedUsers);
+  } else {
+    res.status(404).json({ message: "Aucun utilisateur correspondant." });
+  }
+};
+
 //#endregion -------------------------------
 
 //#region POST -----------------------------
@@ -90,5 +106,6 @@ export {
     patchUserById,
     deleteUserById,
     getYoungestUser,
+    searchUsers,
 };
 //#endregion ---------------------------------

@@ -19,6 +19,12 @@ const findYoungestUser = () => {
     user.age < youngest.age ? user : youngest
   );
 };
+
+const searchUsersByName = (query) => {
+  const lowerQuery = query.toLowerCase();
+  return users.filter((user) => user.name.toLowerCase().includes(lowerQuery));
+};
+
 //#endregion
 
 //#region POST
@@ -65,6 +71,6 @@ const removeUserById = (userId) => {
 //#endregion
 
 //#region EXPORTS
-export { findUserById, createUserById, replaceUser, patchUser, removeUserById, findYoungestUser };
+export { findUserById, createUserById, replaceUser, patchUser, removeUserById, findYoungestUser, searchUsersByName };
 //#endregion
 
