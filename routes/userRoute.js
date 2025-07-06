@@ -8,10 +8,14 @@ import {
     deleteUserById,
     getYoungestUser,
     searchUsers,
+    getAverageAge,
+    getUsersByDomain,
 } from "../controllers/userController.js";
 
 router.get("/youngest", getYoungestUser);
-router.get("/search", searchUsers)
+router.get("/search", searchUsers);
+router.get("/average-age", getAverageAge)
+router.get("/domain/:domain", getUsersByDomain);
 router.get("/:id", getUserById);
 
 router.post("/", postUserById);

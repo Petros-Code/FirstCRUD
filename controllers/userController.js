@@ -8,6 +8,8 @@ import {
     removeUserById,
     findYoungestUser,
     searchUsersByName,
+    calculateAverageAge,
+    findUsersByEmailDomain,
 } from "../services/userService.js"
 //#endregion --------------------------------
 
@@ -42,6 +44,25 @@ const searchUsers = (req, res) => {
     res.json(matchedUsers);
   } else {
     res.status(404).json({ message: "Aucun utilisateur correspondant." });
+  }
+};
+
+const getAverageAge = (req, res) => {
+  const average = calculateAverageAge();
+  if (average !== null) {
+    res.json({ averageAge: parseFloat(average.toFixed(2)) });
+  } else {
+    res.status(404).json({ error: "Aucun utilisateur disponible pour le calcul." });
+  }
+};
+
+const getUsersByDomain = (req, res) => {
+  const domain = req.params.domain;
+  const matchedUsers = findUsersByEmailDomain(domain);
+  if (matchedUsers.length > 0) {
+    res.json(matchedUsers);
+  } else {
+    res.status(404).json({ message: `Aucun utilisateur avec le domaine '${domain}'.` });
   }
 };
 
@@ -107,5 +128,7 @@ export {
     deleteUserById,
     getYoungestUser,
     searchUsers,
+    getAverageAge,
+    getUsersByDomain,
 };
 //#endregion ---------------------------------

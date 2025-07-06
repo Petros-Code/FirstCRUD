@@ -25,6 +25,20 @@ const searchUsersByName = (query) => {
   return users.filter((user) => user.name.toLowerCase().includes(lowerQuery));
 };
 
+const calculateAverageAge = () => {
+  if (users.length === 0) return null;
+  const totalAge = users.reduce((sum, user) => sum + user.age, 0);
+  return totalAge / users.length;
+};
+
+const findUsersByEmailDomain = (domain) => {
+  const lowerDomain = domain.toLowerCase();
+  return users.filter((user) => {
+    const emailDomain = user.email.split("@")[1]?.toLowerCase();
+    return emailDomain === lowerDomain;
+  });
+};
+
 //#endregion
 
 //#region POST
@@ -71,6 +85,6 @@ const removeUserById = (userId) => {
 //#endregion
 
 //#region EXPORTS
-export { findUserById, createUserById, replaceUser, patchUser, removeUserById, findYoungestUser, searchUsersByName };
+export { findUserById, createUserById, replaceUser, patchUser, removeUserById, findYoungestUser, searchUsersByName, calculateAverageAge, findUsersByEmailDomain, };
 //#endregion
 
