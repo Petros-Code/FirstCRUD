@@ -52,7 +52,21 @@ const createUserById = (data) => {
   };
   users.push(newUser);
   return newUser;
-}
+};
+
+const sortUsersByKey = (key) => {
+  const validKeys = ["name", "age"];
+  if (!validKeys.includes(key)) return null;
+
+  return [...users].sort((a, b) => {
+    if (key === "name") {
+      return a.name.localeCompare(b.name);
+    } else if (key === "age") {
+      return a.age - b.age;
+    }
+  });
+};
+
 //#endregion
 
 //#region PUT
@@ -85,6 +99,6 @@ const removeUserById = (userId) => {
 //#endregion
 
 //#region EXPORTS
-export { findUserById, createUserById, replaceUser, patchUser, removeUserById, findYoungestUser, searchUsersByName, calculateAverageAge, findUsersByEmailDomain, };
+export { findUserById, createUserById, replaceUser, patchUser, removeUserById, findYoungestUser, searchUsersByName, calculateAverageAge, findUsersByEmailDomain, sortUsersByKey, };
 //#endregion
 

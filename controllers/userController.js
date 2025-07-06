@@ -10,6 +10,7 @@ import {
     searchUsersByName,
     calculateAverageAge,
     findUsersByEmailDomain,
+    sortUsersByKey,
 } from "../services/userService.js"
 //#endregion --------------------------------
 
@@ -73,6 +74,20 @@ const postUserById = (req, res) => {
     const newUser = createUserById(req.body);
     res.status(201).json({ message: "Utilisateur créé avec succès", newUser });
 };
+
+const sortUsers = (req, res) => {
+  const { sortBy } = req.body;
+
+  const sortedUsers = sortUsersByKey(sortBy);
+  if (!sortedUsers) {
+    return res.status(400).json({
+      error: "Clé de tri invalide. Utilisez 'name' ou 'age'.",
+    });
+  }
+
+  res.json(sortedUsers);
+};
+
 //#endregion -------------------------------
 
 //#region PUT ------------------------------
@@ -130,5 +145,6 @@ export {
     searchUsers,
     getAverageAge,
     getUsersByDomain,
+    sortUsers,
 };
 //#endregion ---------------------------------

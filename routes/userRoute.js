@@ -10,15 +10,18 @@ import {
     searchUsers,
     getAverageAge,
     getUsersByDomain,
+    sortUsers,
 } from "../controllers/userController.js";
+
+router.post("/", postUserById);
+router.post("/sort", sortUsers);
+
 
 router.get("/youngest", getYoungestUser);
 router.get("/search", searchUsers);
 router.get("/average-age", getAverageAge)
 router.get("/domain/:domain", getUsersByDomain);
 router.get("/:id", getUserById);
-
-router.post("/", postUserById);
 
 router.put("/:id", putUserById);
 
