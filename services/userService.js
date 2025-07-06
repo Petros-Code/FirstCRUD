@@ -29,18 +29,35 @@ const createUserById = (data) => {
 //#endregion
 
 //#region PUT
-
+const replaceUser = (userId, updatedUser) => {
+  const index = users.findIndex((u) => u["user-id"] == userId);
+  if (index === -1) return null;
+  users[index] = updatedUser;
+  return users[index];
+}
 //#endregion
 
 //#region PATCH
+const patchUser = (userId, updatedUser) => {
+  const user = users.find((u) => u["user-id"] === userId);
+  if (!user) return null;
+  Object.assign(user, updatedUser);
+  return user;
+};
 //#endregion
 
 //#region DELETE
+const removeUserById = (userId) => {
+  const index = users.findIndex((u) =>  u["user-id"] === userId);
+  if (index !== -1) {
+    users.splice(index, 1);
+    return true;
+  }
+  return false;
+};
 //#endregion
 
 //#region EXPORTS
-export { findUserById, createUserById };
+export { findUserById, createUserById, replaceUser, patchUser, removeUserById };
 //#endregion
 
-
-// , createUserById, replaceUserById, updateUserById, removeUserById
