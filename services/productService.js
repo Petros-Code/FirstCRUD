@@ -4,4 +4,8 @@ const getAllProducts = () => {
   return products;
 };
 
-export { getAllProducts };
+const getProductsById = (id) => {
+  return products.find((p) => p.id === id);
+};
+
+export { getAllProducts, getProductsById };
