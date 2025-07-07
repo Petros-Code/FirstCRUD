@@ -1,6 +1,7 @@
 import express from "express";
 import userRoute from "./routes/userRoute.js";
 import productRoute from "./routes/productRoute.js";
+import purchaseRoute from "./routes/purchaseRoute.js";
 
 const app = express();
 app.use(express.json());
@@ -13,6 +14,7 @@ app.get("/", (req, res) => {
 
 app.use("/users", userRoute);
 app.use("/products", productRoute);
+app.use("/purchase", purchaseRoute);
 
 app.use((req, res) => {
   res.status(404).json({
